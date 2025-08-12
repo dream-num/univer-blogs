@@ -3,6 +3,7 @@ import { NotionToMarkdown } from "notion-to-md";
 import { PageObjectResponse } from "@notionhq/client/";
 import fs from "fs";
 import path from "path";
+import 'dotenv/config';
 
 export const notion = new Client({ auth: process.env.NOTION_TOKEN });
 export const n2m = new NotionToMarkdown({ notionClient: notion });
