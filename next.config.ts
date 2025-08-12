@@ -12,6 +12,8 @@ const nextConfig: NextConfig = {
       { protocol: 'https', hostname: '**' },
     ],
   },
+  basePath: process.env.NODE_ENV === 'production' ? '/capalyze-blogs' : '',
+  assetPrefix: process.env.NODE_ENV === 'production' ? '/capalyze-blogs/' : ''
 };
 
 export default nextConfig;
