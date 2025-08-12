@@ -12,21 +12,22 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://your-site.com";
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "Gesturs - The Notion Blog",
-    template: `%s | Gesturs`,
+    default: "Capalyze Blog",
+    template: `%s | Capalyze Blog`,
   },
-  description: "A blog built with Next.js and Notion",
+  description: "Capalyze Blog shares insights, tips, and case studies on turning scattered data into intelligent, data-driven decisions with AI-powered analysis.",
+  keywords: "Capalyze Blog, Data Collection, Data Scraping, Data Analysis, Data Crawling, AI Agent, Data Visualization, Sentiment Analysis, Keyword Extraction, OLAP, E-commerce Analytics, Social Media Trends, Vacation Rental Optimization, Data Insights, Business Intelligence, AI Data Tools",
   openGraph: {
-    title: "Gesturs - The Notion Blog",
-    description: "A blog built with Next.js and Notion",
+    title: "Capalyze Blog",
+    description: "Capalyze Blog shares insights, tips, and case studies on turning scattered data into intelligent, data-driven decisions with AI-powered analysis.",
     url: siteUrl,
-    siteName: "Gesturs",
+    siteName: "Capalyze Blog",
     images: [
       {
         url: `${siteUrl}/opengraph-image.png`,
         width: 1200,
         height: 630,
-        alt: "Gesturs - The Notion Blog",
+        alt: "Capalyze Blog",
       },
     ],
     locale: "en_US",
@@ -34,8 +35,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Gesturs - The Notion Blog",
-    description: "A blog built with Next.js and Notion",
+    title: "Capalyze Blog",
+    description: "Capalyze Blog shares insights, tips, and case studies on turning scattered data into intelligent, data-driven decisions with AI-powered analysis.",
     images: [`${siteUrl}/opengraph-image.png`],
   },
   robots: {
