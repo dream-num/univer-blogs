@@ -4,8 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "pnpm run cache:posts && next dev --turbopack",
-    "build": "pnpm run cache:posts && next build",
-    "export": "pnpm build && next export",
+    "build": "pnpm run cache:posts && tsx scripts/generate-sitemap.ts && next build",
     "start": "next start",
     "lint": "next lint",
     "cache:posts": "tsx scripts/cache-posts.ts"

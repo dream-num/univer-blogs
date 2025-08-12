@@ -47,3 +47,4 @@ next-env.d.ts
 # cache
 /cache
 public/posts-cache.json
+sitemap.xml
