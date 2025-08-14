@@ -12,22 +12,22 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://your-site.com";
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "Capalyze Blog",
-    template: `%s | Capalyze Blog`,
+    default: "Univer Blog",
+    template: `%s | Univer Blog`,
   },
-  description: "Capalyze Blog shares insights, tips, and case studies on turning scattered data into intelligent, data-driven decisions with AI-powered analysis.",
-  keywords: "Capalyze Blog, Data Collection, Data Scraping, Data Analysis, Data Crawling, AI Agent, Data Visualization, Sentiment Analysis, Keyword Extraction, OLAP, E-commerce Analytics, Social Media Trends, Vacation Rental Optimization, Data Insights, Business Intelligence, AI Data Tools",
+  description: "Univer is a full-stack framework for creating, editing, and collaborating on spreadsheets, documents, and slides across web and server environments. Empower your workflow with server-driven productivity tools, real-time collaboration, and enterprise-grade integration. Deploy on-premise or in the cloud for secure, scalable document management.",
+  keywords: "JavaScript sheet, Node sheet, JavaScript spreadsheet, Node.js spreadsheet, spreadsheet SDK, web spreadsheet editor, server-side spreadsheet, full-stack document editing, Univer, productivity tools, collaborative editor, online spreadsheet, self-hosted office suite, server-driven spreadsheet, self-hosted spreadsheet, js sheet, js spreadsheet",
   openGraph: {
-    title: "Capalyze Blog",
-    description: "Capalyze Blog shares insights, tips, and case studies on turning scattered data into intelligent, data-driven decisions with AI-powered analysis.",
+    title: "Univer Blog",
+    description: "Univer is a full-stack framework for creating, editing, and collaborating on spreadsheets, documents, and slides across web and server environments. Empower your workflow with server-driven productivity tools, real-time collaboration, and enterprise-grade integration. Deploy on-premise or in the cloud for secure, scalable document management.",
     url: siteUrl,
-    siteName: "Capalyze Blog",
+    siteName: "Univer Blog",
     images: [
       {
         url: `${siteUrl}/opengraph-image.png`,
         width: 1200,
         height: 630,
-        alt: "Capalyze Blog",
+        alt: "Univer Blog",
       },
     ],
     locale: "en_US",
@@ -35,8 +35,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Capalyze Blog",
-    description: "Capalyze Blog shares insights, tips, and case studies on turning scattered data into intelligent, data-driven decisions with AI-powered analysis.",
+    title: "Univer Blog",
+    description: "Univer is a full-stack framework for creating, editing, and collaborating on spreadsheets, documents, and slides across web and server environments. Empower your workflow with server-driven productivity tools, real-time collaboration, and enterprise-grade integration. Deploy on-premise or in the cloud for secure, scalable document management.",
     images: [`${siteUrl}/opengraph-image.png`],
   },
   robots: {
@@ -74,7 +74,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <head>
         <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-MRYQ5T9FHK"
+          src="https://www.googletagmanager.com/gtag/js?id=G-NV1GG0YQ46"
           strategy="afterInteractive"
         />
         <Script id="google-analytics" strategy="afterInteractive">
@@ -82,7 +82,7 @@ export default function RootLayout({
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
-            gtag('config', 'G-MRYQ5T9FHK');
+            gtag('config', 'G-NV1GG0YQ46');
           `}
         </Script>
       </head>

@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://blog.capalyze.ai/sitemap.xml
+Sitemap: https://blog.univer.ai/sitemap.xml

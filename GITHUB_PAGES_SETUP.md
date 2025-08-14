@@ -15,7 +15,7 @@
 |------|-----|
 | `NOTION_TOKEN` | `` |
 | `NOTION_DATABASE_ID` | `` |
-| `NEXT_PUBLIC_SITE_URL` | `https://blog.capalyze.ai` |
+| `NEXT_PUBLIC_SITE_URL` | `https://blog.univer.ai` |
 
 ## 2. 启用 GitHub Pages
 
@@ -39,7 +39,7 @@
 ## 4. 查看部署状态
 
 1. 在 **Actions** 标签页可以查看工作流运行状态
-2. 部署成功后，网站将在 `https://你的用户名.github.io/capalyze-blogs` 访问
+2. 部署成功后，网站将在 `https://你的用户名.github.io/univer-blogs` 访问
 
 ## 注意事项
 
