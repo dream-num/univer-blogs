@@ -10,7 +10,7 @@ export default function ZhHome() {
           Univer 博客
         </h1>
         <p className="text-lg text-muted-foreground">
-          关于如何将分散数据转化为智能数据驱动决策的洞见与实践
+          Univer 是一个前后端同构的全栈开发框架，可以在 web 端和服务端创建、编辑电子表格、文档以及幻灯片。
         </p>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">

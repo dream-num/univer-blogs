@@ -11,7 +11,7 @@ export default function Home() {
           Univer Blog
         </h1>
         <p className="text-lg text-muted-foreground">
-          Insights and tips on turning scattered data into intelligent, data-driven decisions
+          Univer is a full-stack framework for creating and editing spreadsheets, documents, and slides on both web and server.
         </p>
       </div>
 
