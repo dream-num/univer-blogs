@@ -7,23 +7,28 @@ import { calculateReadingTime } from "@/lib/utils";
 import {
   Card,
   CardContent,
+  CardDescription,
   CardFooter,
   CardHeader,
+  CardTitle,
 } from "@/components/ui/card";
 import { Clock, Calendar, ArrowUpRight } from "lucide-react";
 
 interface PostCardProps {
   post: Post;
+  locale?: string;
 }
 
-export default function PostCard({ post }: PostCardProps) {
+export default function PostCard({ post, locale }: PostCardProps) {
+  const linkHref =
+    locale === "zh" ? `/zh/posts/${post.slug}` : `/posts/${post.slug}`;
   const wordCount = post.content ? getWordCount(post.content) : 0;
   const readingTime = calculateReadingTime(wordCount);
 
   return (
     <Card className="group relative pt-0 overflow-hidden hover:shadow-xl transition-all duration-300 bg-card/50 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <Link
-        href={`/posts/${post.slug}`}
+        href={linkHref}
         className="absolute inset-0 z-10"
         aria-label={post.title}
       />
