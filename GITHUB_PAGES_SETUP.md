@@ -1,5 +1,7 @@
 # GitHub Pages 部署配置指南
 
+博客现已迁移，当前仓库只构建旧地址的浏览器跳转页。以下 Notion Secrets 配置保留作历史参考，当前构建不再读取 Notion，也不需要这些凭据；请按 [README 的迁移说明](README.md#blog-migration)先发布新文章，再发布跳转页。现有 GitHub Pages 工作流仍可手动触发。
+
 ## 1. 配置 GitHub Secrets
 
 在GitHub仓库页面进行以下操作：

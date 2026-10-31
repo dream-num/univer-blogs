@@ -6,7 +6,7 @@ The four article slugs are retained in `src/lib/forwarding.ts`. English and Chin
 
 `pnpm build` exports these pages to `out/` through the existing Next.js/GitHub Pages workflow. It no longer reads Notion or needs Notion credentials. Publish the migrated articles in `dream-num/documentation` before publishing these forwarding pages. `pnpm test` checks the destination mapping.
 
-The older Notion setup below is retained as historical documentation; it is no longer part of the normal build.
+The older Notion setup below and the [GitHub Pages setup guide](GITHUB_PAGES_SETUP.md) are retained as historical documentation; Notion configuration is no longer part of the normal build.
 
 ---
 
