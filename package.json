@@ -3,10 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "pnpm run cache:posts && next dev --turbopack",
-    "build": "pnpm run cache:posts && tsx scripts/generate-sitemap.ts && next build",
+    "dev": "next dev --turbopack",
+    "build": "tsx scripts/generate-sitemap.ts && next build",
     "start": "next start",
     "lint": "next lint",
+    "test": "node --test src/lib/__tests__/*.spec.mjs",
     "cache:posts": "tsx scripts/cache-posts.ts"
   },
   "dependencies": {

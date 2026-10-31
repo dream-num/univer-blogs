@@ -1,3 +1,15 @@
+## Blog migration
+
+The blog has moved to `https://docs.univer.ai/blog` and `https://docs.univer.ai/zh-CN/blog`. This repository retains the old GitHub Pages addresses as browser-forwarding pages. Existing hosting and DNS stay unchanged; no HTTP 301 is configured here.
+
+The four article slugs are retained in `src/lib/forwarding.ts`. English and Chinese articles open their matching new URLs. Each page provides an immediate HTML refresh, a canonical URL and a visible link; a small inline script preserves queries and anchors. Unknown addresses fall back to the blog index through the static 404 page.
+
+`pnpm build` exports these pages to `out/` through the existing Next.js/GitHub Pages workflow. It no longer reads Notion or needs Notion credentials. Publish the migrated articles in `dream-num/documentation` before publishing these forwarding pages. `pnpm test` checks the destination mapping.
+
+The older Notion setup below is retained as historical documentation; it is no longer part of the normal build.
+
+---
+
 # Notion-Powered Next.js Blog Template
 
 A modern, fast, and customizable blog template powered by Notion as a CMS and Next.js. This template allows you to use Notion as your content management system while serving your blog with Next.js.

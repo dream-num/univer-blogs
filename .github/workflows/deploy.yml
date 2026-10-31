@@ -36,13 +36,6 @@ jobs:
       - name: Install dependencies
         run: pnpm install
         
-      - name: Setup environment variables
-        run: |
-          echo "NOTION_TOKEN=${{ secrets.NOTION_TOKEN }}" >> .env
-          echo "NOTION_DATABASE_ID=${{ secrets.NOTION_DATABASE_ID }}" >> .env
-          echo "NOTION_ZH_DATABASE_ID=${{ secrets.NOTION_ZH_DATABASE_ID }}" >> .env
-          echo "NEXT_PUBLIC_SITE_URL=${{ secrets.NEXT_PUBLIC_SITE_URL }}" >> .env
-          
       - name: Build
         run: pnpm run build
         
