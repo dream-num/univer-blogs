@@ -17,6 +17,8 @@ export interface Post {
   coverImage?: string;
   description: string;
   date: string;
+  // 最后更新时间：优先取 Notion 的 "Last Updated" 日期属性，否则用页面的 last_edited_time
+  updated?: string;
   content: string;
   author?: string;
   tags?: string[];
@@ -42,6 +44,12 @@ export function getWordCount(content: string): number {
     return cleanText.length;
   }
   return cleanText ? cleanText.split(" ").length : 0;
+}
+
+// 最后更新日期和发布日期不是同一天时才显示
+export function isUpdated(post: Post): boolean {
+  if (!post.updated) return false;
+  return new Date(post.updated).toISOString().slice(0, 10) > new Date(post.date).toISOString().slice(0, 10);
 }
 
 // 读取缓存，支持英文与中文两个文件
@@ -76,6 +84,29 @@ export async function fetchPublishedPosts(databaseId: string = process.env.NOTIO
   return posts.results as PageObjectResponse[];
 }
 
+// 摘要：优先取 Notion 的 "Description" 文本属性；没有时取正文第一个普通段落
+// （跳过标题、引用、列表、表格、图片、代码），去掉 Markdown 标记后截到 160 字
+export function getDescription(properties: any, content: string): string {
+  const custom = (properties?.Description?.rich_text || [])
+    .map((t: any) => t.plain_text)
+    .join("")
+    .trim();
+  if (custom) return custom;
+
+  const firstParagraph =
+    content
+      .split("\n")
+      .map((l) => l.trim())
+      .find((l) => l.length > 0 && !/^(#|>|[-*+] |\d+\. |\||!\[|```|<)/.test(l)) || "";
+  const text = firstParagraph
+    .replace(/!\[[^\]]*\]\([^)]*\)/g, "")
+    .replace(/\[([^\]]*)\]\([^)]*\)/g, "$1")
+    .replace(/[*_`~]/g, "")
+    .replace(/\s+/g, " ")
+    .trim();
+  return text.length > 160 ? text.slice(0, 157).trimEnd() + "..." : text;
+}
+
 export async function getPost(slug: string, locale: 'en' | 'zh' = 'en'): Promise<Post | null> {
   const posts = getPostsFromCache(locale);
   return posts.find((p) => p.slug === slug) || null;
@@ -87,11 +118,8 @@ export async function getPostFromNotion(pageId: string, locale: 'en' | 'zh' = 'e
     const mdBlocks = await n2m.pageToMarkdown(pageId);
     const { parent: contentString } = n2m.toMarkdownString(mdBlocks);
 
-    const paragraphs = contentString.split("\n").filter((l: string) => l.trim().length > 0);
-    const firstParagraph = paragraphs[0] || "";
-    const description = firstParagraph.slice(0, 160) + (firstParagraph.length > 160 ? "..." : "");
-
     const properties = (page as any).properties;
+    const description = getDescription(properties, contentString);
     let rawTitle = properties.Title?.title?.[0]?.plain_text || "Untitled";
     
     // 优先使用 Notion 中的 Slug 属性
@@ -114,8 +142,9 @@ export async function getPostFromNotion(pageId: string, locale: 'en' | 'zh' = 'e
       coverImage: properties["Featured Image"]?.url || undefined,
       description,
       date: properties["Published Date"]?.date?.start || new Date().toISOString(),
+      updated: properties["Last Updated"]?.date?.start || page.last_edited_time,
       content: contentString,
-      author: properties.Author?.people?.[0]?.name,
+      author: properties.Author?.people?.[0]?.name?.trim() || undefined,
       tags: properties.Tags?.multi_select?.map((tag: any) => tag.name) || [],
       category: properties.Category?.select?.name,
       locale,

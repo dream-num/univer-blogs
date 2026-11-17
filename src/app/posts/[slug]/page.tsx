@@ -1,4 +1,4 @@
-import { getPostsFromCache, getWordCount } from "@/lib/notion";
+import { getPostsFromCache, getWordCount, isUpdated } from "@/lib/notion";
 import { format } from "date-fns";
 import Image from "next/image";
 import { notFound } from "next/navigation";
@@ -52,6 +52,7 @@ export async function generateMetadata(
       type: "article",
       url: `${siteUrl}/posts/${post.slug}`,
       publishedTime: new Date(post.date).toISOString(),
+      modifiedTime: new Date(post.updated || post.date).toISOString(),
       authors: post.author ? [post.author] : [],
       tags: post.tags,
       images: [
@@ -96,10 +97,11 @@ export default async function PostPage({ params }: PostPageProps) {
     description: post!.description,
     image: post!.coverImage || `${siteUrl}/opengraph-image.png`,
     datePublished: new Date(post!.date).toISOString(),
+    dateModified: new Date(post!.updated || post!.date).toISOString(),
     author: { "@type": "Person", name: post!.author || "Guest Author" },
     publisher: {
       "@type": "Organization",
-      name: "Your Site Name",
+      name: "Univer",
       logo: { "@type": "ImageObject", url: `${siteUrl}/logo.png` },
     },
     mainEntityOfPage: {
@@ -129,7 +131,17 @@ export default async function PostPage({ params }: PostPageProps) {
 
         <header className="mb-8">
           <div className="flex items-center gap-4 text-muted-foreground mb-4">
-            <time>{format(new Date(post!.date), "MMMM d, yyyy")}</time>
+            <time dateTime={new Date(post!.date).toISOString()}>
+              {format(new Date(post!.date), "MMMM d, yyyy")}
+            </time>
+            {isUpdated(post!) && (
+              <span>
+                Last updated{" "}
+                <time dateTime={new Date(post!.updated!).toISOString()}>
+                  {format(new Date(post!.updated!), "MMMM d, yyyy")}
+                </time>
+              </span>
+            )}
             {post!.author && <span>By {post!.author}</span>}
             <span>{calculateReadingTime(wordCount)}</span>
             <span>{wordCount} words</span>
