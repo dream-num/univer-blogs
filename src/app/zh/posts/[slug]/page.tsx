@@ -1,4 +1,4 @@
-import { getPostsFromCache, getWordCount } from "@/lib/notion";
+import { getPostsFromCache, getWordCount, isUpdated } from "@/lib/notion";
 import { format } from "date-fns";
 import Image from "next/image";
 import { notFound } from "next/navigation";
@@ -40,6 +40,7 @@ export async function generateMetadata(
       type: "article",
       url: `${siteUrl}/zh/posts/${post.slug}`,
       publishedTime: new Date(post.date).toISOString(),
+      modifiedTime: new Date(post.updated || post.date).toISOString(),
       authors: post.author ? [post.author] : [],
       tags: post.tags,
       images: [{ url: post.coverImage || `${siteUrl}/opengraph-image.png`, width: 1200, height: 630, alt: post.title }],
@@ -67,8 +68,9 @@ export default async function ZhPostPage({ params }: PostPageProps) {
     description: post!.description,
     image: post!.coverImage || `${siteUrl}/opengraph-image.png`,
     datePublished: new Date(post!.date).toISOString(),
+    dateModified: new Date(post!.updated || post!.date).toISOString(),
     author: { "@type": "Person", name: post!.author || "Guest Author" },
-    publisher: { "@type": "Organization", name: "Your Site Name", logo: { "@type": "ImageObject", url: `${siteUrl}/logo.png` } },
+    publisher: { "@type": "Organization", name: "Univer", logo: { "@type": "ImageObject", url: `${siteUrl}/logo.png` } },
     mainEntityOfPage: { "@type": "WebPage", "@id": `${siteUrl}/zh/posts/${post!.slug}` },
   };
   return (
@@ -82,7 +84,10 @@ export default async function ZhPostPage({ params }: PostPageProps) {
         )}
         <header className="mb-8">
           <div className="flex items-center gap-4 text-muted-foreground mb-4">
-            <time>{format(new Date(post!.date), "yyyy年M月d日")}</time>
+            <time dateTime={new Date(post!.date).toISOString()}>{format(new Date(post!.date), "yyyy年M月d日")}</time>
+            {isUpdated(post!) && (
+              <span>更新于 <time dateTime={new Date(post!.updated!).toISOString()}>{format(new Date(post!.updated!), "yyyy年M月d日")}</time></span>
+            )}
             {post!.author && <span>作者 {post!.author}</span>}
             <span>{calculateReadingTime(wordCount)}</span>
             <span>{wordCount} 字</span>
